@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Bebas+Neue&family=Poppins&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container-signup {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #b88efc, #6877f4);
+}
+
+.wrapper {
+    position: relative;
+    max-width: 430px;
+    /* max-width: 50rem; */
+    width: 100%;
+    background: #fff;
+    padding: 34px;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.wrapper h2 {
+    position: relative;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+}
+
+.wrapper h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 28px;
+    border-radius: 12px;
+    background: #4070f4;
+}
+
+.message {
+    display: flex;
+    color: #ff0000;
+    background: #fff;
+    font-size: 14px;
+}
+
+.wrapper form {
+    margin-top: 40px;
+}
+
+.wrapper form .input-box {
+    height: 52px;
+    margin: 18px 0;
+}
+
+form .input-box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    padding: 0 15px;
+    font-size: 17px;
+    font-weight: 500;
+    color: #333;
+    border: 1.5px solid #c7bebe;
+    border-bottom-width: 2.5px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+form .input-box button {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    letter-spacing: 1px;
+    background: #6877f4;
+    padding: 0 15px;
+    font-size: 17px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    border-bottom-width: 2.5px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+form .input-box button:hover {
+    background: #b88efc;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+    /* border-color: linear-gradient(to right, #b88efc, #6877f4); */
+    border-color: #4070f4;
+}
+
+form .policy {
+    display: flex;
+    align-items: center;
+}
+
+form .policy span {
+    color: #333;
+    font-size: 8px;
+    font-weight: 500;
+}
+
+form h3 {
+    color: #707070;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+form .text h3 {
+    color: #333;
+    width: 100%;
+    text-align: center;
+
+}
+
+form .text h3 Link {
+    color: #b88efc;
+    font-weight: 600;
+}
+
+form .text h3 Link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

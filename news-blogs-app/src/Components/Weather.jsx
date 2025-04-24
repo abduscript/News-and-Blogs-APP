@@ -8,7 +8,7 @@ const Weather = () => {
 
     useEffect(() => {
         const fetchDefaultLocation = async () => {
-            const defaultLocation = "Makassar"; // Set your default location here
+            const defaultLocation = "New York"; // Set your default location here
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocation}&units=metric&appid=96b5a66470e33fb54031477a5efb236e`
 
             const response = await axios.get(url);

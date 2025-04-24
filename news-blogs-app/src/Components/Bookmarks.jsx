@@ -1,7 +1,6 @@
 import React from 'react'
 import './Modal.css'
 import './Bookmarks.css'
-import demoImg from '../assets/images/demo.jpg'
 
 const Bookmarks = ({show, bookmarks, onClose, onSelectArticle, onDeleteBookmark}) => {
     if (!show) {

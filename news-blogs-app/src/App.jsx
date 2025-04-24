@@ -1,84 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import News from './Components/News.jsx'
-import Blogs from './Components/Blogs.jsx'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './pages/Login.jsx';
+import SignUp from './pages/SignUp.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
+import PrivateRoute from './routes/PrivateRoute.jsx';
+import MainApp from './MainApp.jsx'; // MainApp = komponen yang render News
 
 const App = () => {
-  const [showNews, setShowNews] = useState(true);
-  const [showBlogs, setShowBlogs] = useState(false);
-  const [blogs, setBlogs] = useState([]);
-  const [selectedPost, setSelectedPost] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-
-  useEffect(() => {
-    const savedBlogs = JSON.parse(localStorage.getItem('blogs')) || [];
-    setBlogs(savedBlogs);
-  }, [])
-
-  const handleCreateBlog = (newBlog, isEdit) => {
-    setBlogs((prevBlogs) => {
-      const updatedBlogs = isEdit ? prevBlogs.map((blog) => (blog === selectedPost ? newBlog : blog)) : [...prevBlogs, newBlog]
-      localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
-      return updatedBlogs;
-    });
-    setIsEditing(false);
-    setSelectedPost(null);
-  }
-
-  const handleEditBlog = (blog) => {
-    setSelectedPost(blog);
-    setIsEditing(true);
-    setShowNews(false);
-    setShowBlogs(true);
-  }
-
-  // const handleDeleteBlog = (blog) => {
-  //   setBlogs((prevBlogs) => {
-  //     const updatedBlogs = prevBlogs.filter((b) => b !== blog);
-  //     localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
-  //     return updatedBlogs;
-  //   });
-  // }
-
-  const handleDeleteBlog = (blogToDelete) => {
-    setBlogs((prevBlogs) => {
-      const updatedBlogs = prevBlogs.filter((blog) => blog !== blogToDelete);
-      localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
-      return updatedBlogs;
-    })
-  }
-
-  const handleShowBlogs = () => {
-    setShowNews(false);
-    setShowBlogs(true);
-  }
-
-  const handleBackToNews = () => {
-    setShowNews(true);
-    setShowBlogs(false);
-    setIsEditing(false);
-    setSelectedPost(null);
-  }
-
   return (
-    <div className='container'>
-      <div className="news-blogs-app">
-        {showNews && 
-        <News 
-        onShowBlogs={handleShowBlogs} 
-        blogs={blogs} 
-        onEditBlog={handleEditBlog}
-        onDeleteBlog={handleDeleteBlog}
-        />}
-        {showBlogs && 
-        <Blogs 
-        onBack={handleBackToNews} 
-        onCreateBlog={handleCreateBlog} 
-        editPost={selectedPost} 
-        isEditing={isEditing}
-        />}
-      </div>
-    </div>
-  )
-}
+    <AuthProvider> {/* Bungkus semua supaya state Auth global */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          
+          {/* Proteksi route /home */}
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <MainApp />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;

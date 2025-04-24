@@ -21,7 +21,7 @@ const categories = [
     "Nation"
 ];
 
-const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog }) => {
+const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog  }) => {
     const [headline, setHeadline] = useState(null);
     const [news, setNews] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('general');
@@ -33,6 +33,8 @@ const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog }) => {
     const [showBookmarksModal, setShowBookmarksModal] = useState(false);
     const [selectedPost, setSelectedPost] = useState(null);
     const [showBlogModal, setShowBlogModal] = useState(false);
+
+    const dataUser = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -57,7 +59,7 @@ const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog }) => {
             setHeadline(fetchedNews[0]);
             setNews(fetchedNews.slice(1, 7)); // Get the next 5 articles
             
-            console.log(news);
+            // console.log(news);
         }
 
         fetchNews();
@@ -65,7 +67,7 @@ const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog }) => {
 
     const handleCategoryClick = (e, category) => {
         e.preventDefault();
-        setSelectedCategory(category);
+        setSelectedCategory(category.toLowerCase());
     }
 
     const handleSearch = (e) => {
@@ -99,6 +101,10 @@ const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog }) => {
         setSelectedPost(null);
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+    }
+
     return (
         <div className='news'>
             <header className='news-header'>
@@ -116,7 +122,7 @@ const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog }) => {
                 <div className="navbar">
                     <div className="user" onClick={onShowBlogs}>
                         <img src={userImg} alt="User Image"/>
-                        <p>Mary's Blog</p>
+                        <p>{dataUser.username}'s Blog</p>
                     </div>
                     <nav className="categories">
                         <h1 className="nav-heading">Categories</h1>
@@ -189,7 +195,7 @@ const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog }) => {
                                     <button className="delete-post" onClick={(e) => 
                                     { 
                                         e.stopPropagation();
-                                        onDeleteBlog(blog)
+                                        onDeleteBlog(blog.id)
                                     }} >
                                         <i className="bx bxs-x-circle"></i>
                                     </button>
@@ -208,7 +214,7 @@ const News = ({ onShowBlogs, blogs, onEditBlog, onDeleteBlog }) => {
             </div>
             <footer className="news-footer">
                 <p>
-                    <span>News And Blogs App</span>
+                    <span>News And Blogs App  </span>
                 </p>
                 <p>
                     &copy; All rights reserved. By Code And Create

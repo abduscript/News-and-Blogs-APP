@@ -78,6 +78,12 @@ const Blogs = ({ onBack, onCreateBlog, editPost, isEditing }) => {
             title,
             content,
         }
+
+        // const newBlog = new FormData()
+        // newBlog.append('image', image || noImg)
+        // newBlog.append('title', title)
+        // newBlog.append('content', content)
+
         onCreateBlog(newBlog, isEditing)
         setImage(null)
         setTitle('')
@@ -88,6 +94,7 @@ const Blogs = ({ onBack, onCreateBlog, editPost, isEditing }) => {
             setSubmitted(false)
             onBack()
         }, 800)
+        console.log('New Blog:', newBlog)
     }
 
     return (

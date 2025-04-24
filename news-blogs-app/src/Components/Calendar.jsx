@@ -26,7 +26,7 @@ const Calendar = () => {
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
-    console.log(currentMonth, currentYear, daysInMonth, firstDayOfMonth);
+    // console.log(currentMonth, currentYear, daysInMonth, firstDayOfMonth);
 
     const prevMonth = () => {
         setCurrentMonth((prevMonth) => (prevMonth === 0 ? 11 : prevMonth - 1));
